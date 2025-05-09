@@ -28,7 +28,7 @@ public class Assignment {
     }
 
     //Checks for a student name from the list to pull the right score.
-    public void getScore(String studentName) {
-        System.out.println(studentName + "'s score for " + this.assignmentName + " is " + grades.get(studentName));
+    public double getScore(String studentName) {
+        return grades.get(studentName);
     }
 }

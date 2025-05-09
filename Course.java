@@ -12,7 +12,7 @@ public class Course {
 
     //HashMaps store the current Students, their current class grades, and Assignment objects respectively.
     public HashMap<String, Integer> studentRoster = new HashMap<>();
-    public HashMap<String, Double> studentGrades = new HashMap<>();
+    public HashMap<String, Integer> studentGrades = new HashMap<>();
     public HashMap<String, Assignment> coursework = new HashMap<>();
 
     //Simple Constructor

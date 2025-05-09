@@ -27,11 +27,6 @@ public class Main {
         scnr.nextLine();    //Clears the line left after the last input.
 
         if (inputID < 10001 && inputID > 0) {
-            System.out.println("Please select a course.");
-            dube.setSelectedCourse(scnr.nextLine());
-            System.out.println("Please select an assignment.");
-            dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
-
             do {
                 System.out.println();
                 System.out.println("Please select a menu option:");
@@ -82,8 +77,8 @@ public class Main {
                         dube.addStudentScore(studentName, score);
                         break;
                     case 4:
+                        //This does not behave properly.
                         System.out.println();
-                        //This one either needs to take a course name as a parameter or rework the selectedCourse system.
                         System.out.println("Input the name of the course that you want to display the grades for.");
                         dube.selectedCourse = dube.getCourseObj(scnr.nextLine());
                         dube.displayCourseAvg();
@@ -96,7 +91,8 @@ public class Main {
                         dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
                         System.out.println("Input a student name to display their grade.");
                         studentName = scnr.nextLine();
-                        dube.selectedCourse.getStudentGrade(studentName);
+                        //This shows the students grade, not the grade for the assignment.
+                        System.out.println(dube.selectedCourse.selectedAssignment.getScore(studentName));
                         break;
                     case 6:
                         System.out.println();
@@ -117,11 +113,10 @@ public class Main {
             do {
                 System.out.println("Please select a menu option:");
                 System.out.println("1: Enroll in a course.");
-                System.out.println("2: Drop a course.");
-                System.out.println("3: Check a course grade.");
-                System.out.println("4: Check all course grades.");
-                System.out.println("5: Export my course grades.");
-                System.out.println("6: Exit");
+                System.out.println("2: Check a course grade.");
+                System.out.println("3: Check all course grades.");
+                System.out.println("4: Export my course grades.");
+                System.out.println("5: Exit");
                 menuSelection = scnr.nextInt();
                 //TODO
                 //Change Student here to instead get the proper student object and remove note slashes.
@@ -131,32 +126,25 @@ public class Main {
                         System.out.println();
                         System.out.println("Enter a course name to enroll.");
                         courseName = scnr.nextLine();
-//                      Student.enroll(courseName);
+                        matt.enroll(courseName);
                         break;
                     case 2:
                         System.out.println();
-                        System.out.println("Enter a course name to drop.");
-                        courseName = scnr.nextLine();
-//                      Student.dropCourse(courseName);
+                        System.out.println("Enter a course name to view grade.");
+                        matt.setSelectedCourse(scnr.nextLine());
+                        matt.displayCourseGrade(matt.selectedCourse.courseName);
                         break;
                     case 3:
                         System.out.println();
-                        System.out.println("Enter a course name to view grade.");
-                        courseName = scnr.nextLine();
-//                      Student.displayCourseGrade(courseName);
+                        System.out.println("Displaying all course grades.");
+                        matt.displayAllCourseGrades();
                         break;
                     case 4:
                         System.out.println();
-                        System.out.println("Displaying all course grades.");
-//                      Student.displayAllCourseGrades();
+                        System.out.println("Enter a course name to export grades to a file.");
+                        matt.exportCourseGrades(matt.selectedCourse);
                         break;
                     case 5:
-                        System.out.println();
-                        System.out.println("Enter a course name to export grades to a file.");
-                        courseName = scnr.nextLine();
-//                      Student.exportCourseGrades(courseName);
-                        break;
-                    case 6:
                         System.out.println();
                         continue;
                     default:
