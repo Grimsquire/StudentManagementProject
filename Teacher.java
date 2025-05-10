@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Teacher extends Person {
@@ -82,7 +85,21 @@ public class Teacher extends Person {
     }
 
     //Export a list of Course number and letter grades for each Student to a .txt file.
-    protected void exportCourseGrades(Course courseName) {
-        //TODO
+    protected void exportCourseGrades(Course course) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(course.getCourseName() + "_" + name + ".txt"))) {
+            writer.write("Grade Report");
+            writer.newLine();
+            writer.write("---");
+            writer.newLine();
+                //Runs thru student roster and retreives each name, then gets course average
+                for (String studentName : course.studentRoster.keySet()) {
+                    double studentGrade = course.getStudentCourseAvg(studentName);
+
+                    writer.write(studentName + ": " + studentGrade);
+                    writer.newLine();
+                }
+                writer.write("---");
+                writer.newLine();
+        }
     }
 }

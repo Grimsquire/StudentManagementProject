@@ -9,7 +9,7 @@ public class Student extends Person {
         this.email = email;
         this.age = age;
         this.idNumber = nextId;
-        //Increments static variable nextId so that no 2 Student/Teacher objects have the same idNumber
+        //Increments static variable nextId so that no 2 Student/Teacher objects have the same idNumber 
         ++nextId;
     }
 
