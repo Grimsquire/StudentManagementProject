@@ -18,7 +18,7 @@ public class Main {
         dube.addAssignment("Homework1", 100);
         dube.selectedCourse.setSelectedAssignment("Homework1");
         dube.addStudentScore("Matt", 50);
-        dube.addStudentScore("Brody",80);
+        dube.addStudentScore("Brodie",80);
 
         //TODO
         //Make a while loop.
