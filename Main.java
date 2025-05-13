@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,19 +18,13 @@ public class Main {
         dube.addAssignment("Homework1", 100);
         dube.selectedCourse.setSelectedAssignment("Homework1");
         dube.addStudentScore("Matt", 50);
-        dube.addStudentScore("Brody",80);
+        dube.addStudentScore("Brodie",80);
 
-
+        //TODO
+        //Make a while loop.
         System.out.println("Please input a user ID.");
-        int inputID;
-        do {
-            try {
-                inputID = scnr.nextInt();
-                scnr.nextLine();    //Clears the line left after the last input.
-            } catch (InputMismatchException e) {
-                throw new IllegalArgumentException("Invalid input: Please enter a number ID.");
-            }
-        } while (inputID == 0);
+        int inputID = scnr.nextInt();
+        scnr.nextLine();    //Clears the line left after the last input.
 
         if (inputID < 10001 && inputID > 0) {
             do {
@@ -125,6 +118,8 @@ public class Main {
                 System.out.println("4: Export my course grades.");
                 System.out.println("5: Exit");
                 menuSelection = scnr.nextInt();
+                //TODO
+                //Change Student here to instead get the proper student object and remove note slashes.
                 String courseName;
                 switch (menuSelection) {
                     case 1:
