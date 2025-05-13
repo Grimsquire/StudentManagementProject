@@ -147,7 +147,7 @@ public class Course {
         this.roomNumber = roomNumber;
     }
     public void setInstructor(String instructor) {
-        this.instructorInfo = instructorInfo;
+        this.instructorInfo = instructor;
     }
 
 
