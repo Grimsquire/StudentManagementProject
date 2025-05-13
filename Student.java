@@ -70,7 +70,7 @@ public class Student extends Person {
 
     //Export a Students grades for a given Course to a .txt file.
   protected void exportCourseGrades(Course course) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("examplefile.txt"))) { // Ensure file path is correct
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(course.getCourseName().replaceAll(" ","_") + "_" + this.name.replaceAll(" ","_") + "_grades" + ".txt"))) {
         for (Map.Entry<String, Integer> entry : course.studentRoster.entrySet()) { // Iterate through student roster
             String studentName = entry.getKey();
             
@@ -87,7 +87,7 @@ public class Student extends Person {
 
 
 protected void exportAllCourseGrades(Student student) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("examplefile.txt"))) { // Ensure file path is correct
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.name.replaceAll(" ","_") + "_all_course_grades" + ".txt"))) {
         for (Course course : student.schedule) { // Iterate through student roster
             writer.write("Course: " + course.getCourseName()); //Iterate through course list
             writer.newLine();
