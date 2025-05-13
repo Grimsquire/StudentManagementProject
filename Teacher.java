@@ -42,7 +42,7 @@ public class Teacher extends Person {
         if(this.selectedCourse.studentRoster.containsKey(studentName)) { //Checks if student is within the roster of this course
             this.selectedCourse.selectedAssignment.addScore(studentName, score);
 
-            int updatedClassGrade = (int)this.selectedCourse.getStudentCourseAvg(studentName); //Wakes up course average to calculate new assignment
+            double updatedClassGrade = this.selectedCourse.getStudentCourseAvg(studentName); //Wakes up course average to calculate new assignment
             this.selectedCourse.studentGrades.put(studentName, updatedClassGrade); //Update based on new calculation
         } else {
             System.out.println("Error. Student" + studentName + "is not enrolled in this course.");
