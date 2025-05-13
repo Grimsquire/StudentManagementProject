@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Teacher extends Person {
@@ -39,12 +42,12 @@ public class Teacher extends Person {
     //this is also something that should probably call a method from a Course object, which then calls the right Assignment method.
     //addStudentScore stills lets us add a Students score to the hashmap even when they aren't enrolled.
     protected void addStudentScore(String studentName, int score) {
+        //TODO
+        //add a prompt for student name and score, then call Assignment method addScore and pass these as parameters.
         this.selectedCourse.selectedAssignment.addScore(studentName, score);
         //TODO
         //Don't add to studentGrades, update their class grade and add THAT to studentGrades.
         this.selectedCourse.studentGrades.put(studentName, score);
-        //TODO
-        //add a prompt for student name and score, then call assignment method addScore and pass these as parameters.
     }
 
     //Prints out an average score for the current Course.
@@ -82,7 +85,23 @@ public class Teacher extends Person {
     }
 
     //Export a list of Course number and letter grades for each Student to a .txt file.
-    protected void exportCourseGrades(Course courseName) {
-        //TODO
+    protected void exportCourseGrades(Course course) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(course.getCourseName().replaceAll(" ","_") + "_" + "grades" + ".txt"))) {
+            writer.write("Grade Report");
+            writer.newLine();
+            writer.write("---");
+            writer.newLine();
+            //Runs thru student roster and retreives each name, then gets course average
+            for (String studentName : course.studentRoster.keySet()) {
+                double studentGrade = course.getStudentGrade(studentName);
+
+                writer.write(studentName + ": " + studentGrade);
+                writer.newLine();
+            }
+            writer.write("---");
+            writer.newLine();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
