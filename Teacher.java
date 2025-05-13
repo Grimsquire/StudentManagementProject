@@ -37,18 +37,32 @@ public class Teacher extends Person {
         this.selectedCourse.addAssignment(assignmentName, maxScore);
     }
 
-    //For the currently selected Assignment, adds a Students name and score to the HashMap which keeps tracks of grades.
-    //TODO
-    //this is also something that should probably call a method from a Course object, which then calls the right Assignment method.
-    //addStudentScore stills lets us add a Students score to the hashmap even when they aren't enrolled.
+    //For the currently selected Assignment, adds a Students name and score to the HashMap which keeps tracks of grades..
     protected void addStudentScore(String studentName, int score) {
-        this.selectedCourse.selectedAssignment.addScore(studentName, score);
-        //TODO
-        //Don't add to studentGrades, update their class grade and add THAT to studentGrades.
-        this.selectedCourse.studentGrades.put(studentName, score);
-        //TODO
-        //add a prompt for student name and score, then call assignment method addScore and pass these as parameters.
+        if(this.selectedCourse.studentRoster.containsKey(studentName)) { //Checks if student is within the roster of this course
+            this.selectedCourse.selectedAssignment.addScore(studentName, score);
+
+            int updatedClassGrade = (int)this.selectedCourse.getStudentCourseAvg(studentName); //Wakes up course average to calculate new assignment
+            this.selectedCourse.studentGrades.put(studentName, updatedClassGrade); //Update based on new calculation
+        } else {
+            System.out.println("Error. Student" + studentName + "is not enrolled in this course.");
+        }
     }
+
+    protected void addStudentScore() { //Overload method for prompting rather than using arguments iniitally
+            Scanner scnr = new Scanner(System.in);
+            
+            System.out.print("Enter a student name.");
+            String studentName = scnr.nextLine();
+
+            System.out.println("Enter a score."); 
+            while(!scnr.hasNextInt()) {
+            scnr.hasNext();
+            }
+            int score = scnr.nextInt();
+            //+1 polymorphism
+            addStudentScore(studentName, score);
+        }
 
     //Prints out an average score for the current Course.
     protected String displayCourseAvg() {
@@ -86,7 +100,7 @@ public class Teacher extends Person {
 
     //Export a list of Course number and letter grades for each Student to a .txt file.
     protected void exportCourseGrades(Course course) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(course.getCourseName() + "_" + name + ".txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(course.getCourseName().replaceAll(" ","_") + "_" + "grades" + ".txt"))) {
             writer.write("Grade Report");
             writer.newLine();
             writer.write("---");
