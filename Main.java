@@ -6,28 +6,36 @@ public class Main {
         Scanner scnr = new Scanner(System.in);
         int menuSelection;
 
-        //TODO
-        //Need to make sure that objects are in fact being updated when we alter them. I haven't exactly got a good grasp
-        //on pass by reference and/or pass by value so i'm not positive that an object is being properly updated after it's
-        //put into an ArrayList or Hashmap. Might have to manually 'resubmit' a new object with the changes into those lists.
-
         //List of preset entries for testing/demonstration.
-        Teacher TeacherUser = new Teacher("Dube", "hdh@fsd", 42);
-        Student StudentUser = new Student("John Doe", "sdfsdf@aaaaa", 99);
+        Teacher genericTeacher= new Teacher("Jane Doe", "hdh@fsd", 99);
+        Teacher dube = new Teacher("Tafadzwa Dube","best@ever",35);
+
+        Student genericStudent = new Student("John Doe", "sdfsdf@aaaaa", 99);
         Student matt = new Student("Matt", "grg@dfdf", 31);
         Student brody = new Student("Brody","qwert@qwerty", 24);
         Student jack = new Student("Jack","rrrrr@rrrrr",22);
         Student kate = new Student("Kate","ffff@ffff",23);
 
-        TeacherUser.createCourse("CIS210", "Intro to computer science", "MWF 2:00 - 3:20", 3413);
+        dube.createCourse("CIS210", "Intro to computer science", "MWF 2:00 - 3:20", 3413);
         matt.enroll("CIS210");
+        brody.enroll("CIS210");
+        jack.enroll("CIS210");
+        kate.enroll("CIS210");
 
-        TeacherUser.setSelectedCourse("CIS210");
-        TeacherUser.addAssignment("Homework1", 100);
-        TeacherUser.selectedCourse.setSelectedAssignment("Homework1");
-        TeacherUser.addStudentScore("Matt", 50);
-        TeacherUser.addStudentScore("Brody",80);
+        dube.setSelectedCourse("CIS210");
+        dube.addAssignment("Homework1", 100);
+        dube.addAssignment("Group Project",100);
 
+        dube.selectedCourse.setSelectedAssignment("Homework1");
+        dube.addStudentScore("Matt", 50);
+        dube.addStudentScore("Brody",80);
+        dube.addStudentScore("Jack",99);
+        dube.addStudentScore("Kate",81);
+        dube.selectedCourse.setSelectedAssignment("Group Project");
+        dube.addStudentScore("Matt",100);
+        dube.addAssignment("Brody",100);
+        dube.addAssignment("Jack",100);
+        dube.addAssignment("Kate",100);
 
         System.out.println("Please input a user ID.");
         int inputID;
@@ -67,57 +75,59 @@ public class Main {
                     case 1:
                         System.out.println();
                         System.out.println("Input a name for the course.");
-                        TeacherUser.createCourse();
+                        dube.createCourse();
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("Input the name of the course.");
-                        TeacherUser.setSelectedCourse(scnr.nextLine());
+                        dube.setSelectedCourse(scnr.nextLine());
                         System.out.println("Input a name for the assignment.");
                         assignmentName = scnr.nextLine();
                         System.out.println("Input a max score for the assignment.");
                         maxScore = scnr.nextInt();
-                        TeacherUser.addAssignment(assignmentName, maxScore);
+                        dube.addAssignment(assignmentName, maxScore);
                         break;
                     case 3:
                         System.out.println();
                         System.out.println("Input the name of the course.");
-                        TeacherUser.setSelectedCourse(scnr.nextLine());
+                        dube.setSelectedCourse(scnr.nextLine());
                         System.out.println("Input the name of the assignment.");
-                        TeacherUser.selectedCourse.setSelectedAssignment(scnr.nextLine());
+                        dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
                         System.out.println("Input a student name.");
                         studentName = scnr.nextLine();
                         System.out.println("Input a score for the student.");
                         score = scnr.nextInt();
-                        TeacherUser.addStudentScore(studentName, score);
+                        dube.addStudentScore(studentName, score);
                         break;
                     case 4:
                         //This does not behave properly.
                         System.out.println();
                         System.out.println("Input the name of the course that you want to display the grades for.");
-                        TeacherUser.setSelectedCourse(scnr.nextLine());
-                        System.out.println("Average score for " + TeacherUser.selectedCourse.courseName + " is " + TeacherUser.displayCourseAvg());
+                        dube.setSelectedCourse(scnr.nextLine());
+                        System.out.println("Average score for " + dube.selectedCourse.courseName + " is " + dube.displayCourseAvg());
                         break;
                     case 5:
                         System.out.println();
                         System.out.println("Input the name of the assignment that you want to display the average for.");
-                        TeacherUser.selectedCourse.setSelectedAssignment(scnr.nextLine());
-                        System.out.println("Average score for " + TeacherUser.selectedCourse.selectedAssignment.assignmentName + " is " + TeacherUser.displayAssignmentAvg());
+                        dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
+                        System.out.println("Average score for " + dube.selectedCourse.selectedAssignment.assignmentName + " is " + dube.displayAssignmentAvg());
+                        break;
                     case 6:
                         System.out.println();
                         System.out.println("Input the name of the course.");
-                        TeacherUser.setSelectedCourse(scnr.nextLine());
+                        dube.setSelectedCourse(scnr.nextLine());
                         System.out.println("Input the name of the assignment.");
-                        TeacherUser.selectedCourse.setSelectedAssignment(scnr.nextLine());
+                        dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
                         System.out.println("Input a student name to display their grade.");
                         studentName = scnr.nextLine();
-                        System.out.println(TeacherUser.selectedCourse.selectedAssignment.getScore(studentName));
+                        System.out.println(dube.selectedCourse.selectedAssignment.getScore(studentName));
                         break;
                     case 7:
                         System.out.println();
                         System.out.println("Input a course to export all course grades.");
-                        TeacherUser.setSelectedCourse(scnr.nextLine());
-                        TeacherUser.exportCourseGrades(TeacherUser.selectedCourse);
+                        dube.setSelectedCourse(scnr.nextLine());
+                        dube.exportCourseGrades(dube.selectedCourse);
+                        System.out.println("Done!");
                         break;
                     case 8:
                         System.out.println();
@@ -127,7 +137,7 @@ public class Main {
                         System.out.println("Invalid selection.");
                         break;
                 }
-            } while (menuSelection != 7);
+            } while (menuSelection != 8);
         } else if (inputID > 10000) {
             do {
                 System.out.println("Please select a menu option:");
@@ -144,23 +154,23 @@ public class Main {
                         System.out.println();
                         System.out.println("Enter a course name to enroll.");
                         courseName = scnr.nextLine();
-                        StudentUser.enroll(courseName);
+                        genericStudent.enroll(courseName);
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("Enter a course name to view grade.");
-                        StudentUser.setSelectedCourse(scnr.nextLine());
-                        StudentUser.displayCourseGrade(StudentUser.selectedCourse.courseName);
+                        genericStudent.setSelectedCourse(scnr.nextLine());
+                        genericStudent.displayCourseGrade(genericStudent.selectedCourse.courseName);
                         break;
                     case 3:
                         System.out.println();
                         System.out.println("Displaying all course grades.");
-                        StudentUser.displayAllCourseGrades();
+                        genericStudent.displayAllCourseGrades();
                         break;
                     case 4:
                         System.out.println();
                         System.out.println("Enter a course name to export grades to a file.");
-                        StudentUser.exportCourseGrades(StudentUser.selectedCourse);
+                        genericStudent.exportCourseGrades(genericStudent.selectedCourse);
                         break;
                     case 5:
                         System.out.println();
@@ -170,7 +180,7 @@ public class Main {
                         System.out.println("Invalid selection.");
                 }
                 System.out.println();
-            } while (menuSelection != 6);
+            } while (menuSelection != 5);
         } else {
             System.out.println("Invalid ID.");
         }
