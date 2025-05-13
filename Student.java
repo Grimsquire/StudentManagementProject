@@ -71,16 +71,17 @@ public class Student extends Person {
     //Export a Students grades for a given Course to a .txt file.
   protected void exportCourseGrades(Course course) throws IOException {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("examplefile.txt"))) { // Ensure file path is correct
-        for (Map.Entry<String, Integer> entry : course.studentRoster.entrySet()) { // Iterate through student roster
+        for (Map.Entry<String, Integer> entry : selectedCourse.studentRoster.entrySet()) { // Iterate through student roster
             String studentName = entry.getKey();
-            
-            // Retrieve student's grade for selected assignment, if available
-            double studentGrade = course.selectedAssignment.grades.containsKey(studentName) 
-                ? course.selectedAssignment.grades.get(studentName) 
-                : 0.0; // Default to 0 if not found
+            if (this.name == studentName) {
+                // Retrieve student's grade for selected assignment, if available
+                double studentGrade = selectedCourse.selectedAssignment.grades.containsKey(studentName)
+                        ? selectedCourse.selectedAssignment.grades.get(studentName)
+                        : 0.0; // Default to 0 if not found
 
-            writer.write(studentName + ": " + studentGrade);
-            writer.newLine(); // Move to the next line in the file
+                writer.write(studentName + ": " + studentGrade);
+                writer.newLine(); // Move to the next line in the file
+            }
         }
     }
 }

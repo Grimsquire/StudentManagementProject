@@ -17,14 +17,17 @@ public class Main {
         Student kate = new Student("Kate","ffff@ffff",23);
 
         dube.createCourse("CIS210", "Intro to computer science", "MWF 2:00 - 3:20", 3413);
+
         matt.enroll("CIS210");
         brody.enroll("CIS210");
         jack.enroll("CIS210");
         kate.enroll("CIS210");
 
         dube.setSelectedCourse("CIS210");
+        matt.setSelectedCourse("CIS210");
         dube.addAssignment("Homework1", 100);
         dube.addAssignment("Group Project",100);
+
 
         dube.selectedCourse.setSelectedAssignment("Homework1");
         dube.addStudentScore("Matt", 50);
@@ -100,7 +103,6 @@ public class Main {
                         dube.addStudentScore(studentName, score);
                         break;
                     case 4:
-                        //This does not behave properly.
                         System.out.println();
                         System.out.println("Input the name of the course that you want to display the grades for.");
                         dube.setSelectedCourse(scnr.nextLine());
@@ -147,30 +149,34 @@ public class Main {
                 System.out.println("4: Export my course grades.");
                 System.out.println("5: Exit");
                 menuSelection = scnr.nextInt();
+                scnr.nextLine();
 
                 String courseName;
                 switch (menuSelection) {
                     case 1:
+                        //TODO
+                        //Doesn't actually put the student names into the course properly.
                         System.out.println();
                         System.out.println("Enter a course name to enroll.");
                         courseName = scnr.nextLine();
-                        genericStudent.enroll(courseName);
+                        matt.enroll(courseName);
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("Enter a course name to view grade.");
-                        genericStudent.setSelectedCourse(scnr.nextLine());
-                        genericStudent.displayCourseGrade(genericStudent.selectedCourse.courseName);
+                        matt.setSelectedCourse(scnr.nextLine());
+                        matt.displayCourseGrade(genericStudent.selectedCourse.courseName);
                         break;
                     case 3:
                         System.out.println();
                         System.out.println("Displaying all course grades.");
-                        genericStudent.displayAllCourseGrades();
+                        matt.displayAllCourseGrades();
                         break;
                     case 4:
                         System.out.println();
                         System.out.println("Enter a course name to export grades to a file.");
-                        genericStudent.exportCourseGrades(genericStudent.selectedCourse);
+                        matt.setSelectedCourse(scnr.nextLine());
+                        matt.exportCourseGrades(genericStudent.selectedCourse);
                         break;
                     case 5:
                         System.out.println();
