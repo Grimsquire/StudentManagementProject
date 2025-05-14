@@ -38,7 +38,7 @@ public class Teacher extends Person {
     //TODO
     //this is also something that should probably call a method from a Course object, which then calls the right Assignment method.
     //addStudentScore stills lets us add a Students score to the hashmap even when they aren't enrolled.
-    protected void addStudentScore(String studentName, int score) {
+    protected void addStudentScore(String studentName, double score) {
         this.selectedCourse.selectedAssignment.addScore(studentName, score);
         //TODO
         //Don't add to studentGrades, update their class grade and add THAT to studentGrades.

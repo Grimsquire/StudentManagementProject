@@ -1,9 +1,11 @@
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Student extends Person {
+    public HashMap<String, Student> allStudents = new HashMap<>();
     public Student (String name, String email, int age) {
         this.name = name;
         this.email = email;
@@ -75,9 +77,7 @@ public class Student extends Person {
             String studentName = entry.getKey();
             
             // Retrieve student's grade for selected assignment, if available
-            double studentGrade = course.selectedAssignment.grades.containsKey(studentName) 
-                ? course.selectedAssignment.grades.get(studentName) 
-                : 0.0; // Default to 0 if not found
+            double studentGrade = course.selectedAssignment.grades.getOrDefault(studentName, 0.0); // Default to 0 if not found
 
             writer.write(studentName + ": " + studentGrade);
             writer.newLine(); // Move to the next line in the file
@@ -95,7 +95,7 @@ protected void exportAllCourseGrades(Student student) throws IOException {
             if (course.selectedAssignment != null) { //Goes through every assignment, gets grade and prints it
                 writer.write("Assignment: " + course.selectedAssignment.assignmentName);
 
-                double studentGrade = course.selectedAssignment.grades.getOrDefault(student.getName(), 0); 
+                double studentGrade = course.selectedAssignment.grades.getOrDefault(student.getName(), 0.0);
                 writer.write("Grade: " + studentGrade);
                 writer.newLine();
 

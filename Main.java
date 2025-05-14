@@ -16,7 +16,7 @@ public class Main {
         matt.enroll("CIS210");
         dube.setSelectedCourse("CIS210");
         dube.addAssignment("Homework1", 100);
-        dube.selectedCourse.setSelectedAssignment("Homework1");
+        Course.getCourse("CIS210").setSelectedAssignment("Homework1");
         dube.addStudentScore("Matt", 50);
         dube.addStudentScore("Brodie",80);
 
@@ -51,13 +51,17 @@ public class Main {
                 switch (menuSelection) {
                     case 1:
                         System.out.println();
-                        System.out.println("Input a name for the course.");
                         dube.createCourse();
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("Input the name of the course.");
-                        dube.setSelectedCourse(scnr.nextLine());
+                        try {
+                            Course.getCourse(scnr.nextLine());
+                        } catch (Exception e) {
+                            System.out.println("Invalid course. Try again!");
+                            break;
+                        }
                         System.out.println("Input a name for the assignment.");
                         assignmentName = scnr.nextLine();
                         System.out.println("Input a max score for the assignment.");
