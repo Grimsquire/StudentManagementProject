@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -40,16 +39,11 @@ public class Main {
         dube.addStudentScore("Jack",100);
         dube.addStudentScore("Kate",100);
 
+        //TODO
+        //Make a while loop.
         System.out.println("Please input a user ID.");
-        int inputID;
-        do {
-            try {
-                inputID = scnr.nextInt();
-                scnr.nextLine();    //Clears the line left after the last input.
-            } catch (InputMismatchException e) {
-                throw new IllegalArgumentException("Invalid input: Please enter a number ID.");
-            }
-        } while (inputID == 0);
+        int inputID = scnr.nextInt();
+        scnr.nextLine();    //Clears the line left after the last input.
 
         if (inputID < 10001 && inputID > 0) {
             do {
@@ -149,8 +143,8 @@ public class Main {
                 System.out.println("4: Export my course grades.");
                 System.out.println("5: Exit");
                 menuSelection = scnr.nextInt();
-                scnr.nextLine();
 
+                scnr.nextLine();
                 String courseName;
                 switch (menuSelection) {
                     case 1:

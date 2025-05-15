@@ -10,8 +10,9 @@ public class Course {
 
     //HashMaps store the current Students, their current class grades, and Assignment objects respectively.
     public HashMap<String, Integer> studentRoster = new HashMap<>();
-    public HashMap<String, Integer> studentGrades = new HashMap<>();
+    public HashMap<String, Double> studentGrades = new HashMap<>();
     public HashMap<String, Assignment> coursework = new HashMap<>();
+    public static HashMap<String, Course> allCourses = new HashMap<>();
 
     //Simple Constructor
     public Course (String courseName) {
@@ -19,6 +20,7 @@ public class Course {
         this.courseDescription = "No description given.";
         String meetingTime = "Time to be determined.";
         String roomNumber = "Room number unknown.";
+        allCourses.put(this.courseName, this);
     }
 
     //Parameterized constructor used in Teacher class when using createCourse method.
@@ -28,8 +30,16 @@ public class Course {
         this.meetingTime = meetingTime;
         this.roomNumber = roomNumber;
         this.instructorInfo = instructor;
+        allCourses.put(this.courseName, this);
     }
 
+    public static Course getCourse(String courseName) throws Exception {
+        if (allCourses.containsKey(courseName)) {
+            return allCourses.get(courseName);
+        }
+
+        throw new Exception("Invalid course!");
+    }
     //Creates a new Assignment object and adds it to the coursework HashMap. The assignmentName and maxScore parameters
     //are used in the constructor for a new Assignment, and assignmentName is also used as a key to find the Assignment object.
     public void addAssignment(String assignmentName, int maxScore) {
@@ -62,8 +72,13 @@ public class Course {
     //Removes the given student object from the studentRoster HashMap.
     public void removeStudent(String studentName) {
         studentRoster.remove(studentName);
-        //TODO
-        //Make sure to remove all instances of that student name (i.e. key) from all assignment HashMaps.
+        for (Assignment i : coursework.values()) {
+            if (i.grades.containsKey(studentName)) {
+                i.grades.remove(studentName);
+            } else {
+                System.out.println("No instance of the student name was found in " + i.assignmentName);
+            }
+        }
     }
 
     //Simple print out of all keys (i.e. studentName) from the studentRoster HashMap.
@@ -114,15 +129,15 @@ public class Course {
         int numAssignments = 0;
 
         if (studentGrades.containsKey(studentName)) {
-            sum = studentGrades.get(studentName); // Retrieves stored grade
-            numAssignments = 1; // This should represent the actual number of assignments
+            sum = studentGrades.get(studentName);
+            numAssignments = 1;
         } else {
             System.out.println("No grades found for: " + studentName);
             return 0.0;
         }
 
-    return sum / numAssignments;
-}
+        return sum / numAssignments;
+    }
 
     public void displayAllInfo() {
         System.out.println("-" + this.courseName + "-");
