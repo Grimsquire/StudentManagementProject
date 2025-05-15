@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -39,11 +40,16 @@ public class Main {
         dube.addStudentScore("Jack",100);
         dube.addStudentScore("Kate",100);
 
-        //TODO
-        //Make a while loop.
         System.out.println("Please input a user ID.");
-        int inputID = scnr.nextInt();
-        scnr.nextLine();    //Clears the line left after the last input.
+        int inputID;
+        do {
+            try {
+                inputID = scnr.nextInt();
+                scnr.nextLine();    //Clears the line left after the last input.
+            } catch (InputMismatchException e) {
+                throw new IllegalArgumentException("Invalid input: Please enter a number ID.");
+            }
+        } while (inputID == 0);
 
         if (inputID < 10001 && inputID > 0) {
             do {
