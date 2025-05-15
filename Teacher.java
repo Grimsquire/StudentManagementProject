@@ -43,14 +43,14 @@ public class Teacher extends Person {
         if(this.selectedCourse.studentRoster.containsKey(studentName)) { //Checks if student is within the roster of this course
             this.selectedCourse.selectedAssignment.addScore(studentName, score);
 
-            int updatedClassGrade = (int)this.selectedCourse.getStudentGrade(studentName); //Wakes up course average to calculate new assignment
+            double updatedClassGrade = this.selectedCourse.getStudentGrade(studentName); //Wakes up course average to calculate new assignment
             this.selectedCourse.studentGrades.put(studentName, updatedClassGrade); //Update based on new calculation
         } else {
             System.out.println("Error. Student" + studentName + "is not enrolled in this course.");
         }
     }
 
-    protected void addStudentScore() { //Overload method for prompting rather than using arguments iniitally
+    protected void addStudentScore() throws Exception { //Overload method for prompting rather than using arguments iniitally
             Scanner scnr = new Scanner(System.in);
 
             System.out.print("Enter a student name.");
@@ -58,7 +58,7 @@ public class Teacher extends Person {
 
             System.out.println("Enter a score.");
             while(!scnr.hasNextInt()) {
-            scnr.hasNext();
+                scnr.hasNext();
             }
             int score = scnr.nextInt();
             //+1 polymorphism

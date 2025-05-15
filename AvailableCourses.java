@@ -20,5 +20,4 @@ public class AvailableCourses {
     public static Course findCourseObj(String courseName) {
         return courseList.get(courseName);
     }
-
 }

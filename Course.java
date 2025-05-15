@@ -99,10 +99,7 @@ public class Course {
         return studGrade;
     }
 
-    //TODO
     //Finds the average grade from all Students and finds what the average grade is for the selectedAssignment.
-    //this should be moved over to the Assignment class for the sake of encapsulation and clarity.
-
     public double getAssignmentAvg() throws Exception {
         double avgScre = selectedAssignment.calcAvgScore();
         if (avgScre == -1) {
