@@ -1,8 +1,6 @@
 import java.util.HashMap;
 
 public class Course {
-    //TODO
-    //Make these private?
     public Assignment selectedAssignment;
     public String courseName;
     public String courseDescription;
@@ -179,7 +177,7 @@ public class Course {
         this.roomNumber = roomNumber;
     }
     public void setInstructor(String instructor) {
-        this.instructorInfo = instructorInfo;
+        this.instructorInfo = instructor;
     }
 
 

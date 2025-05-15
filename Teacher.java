@@ -37,12 +37,13 @@ public class Teacher extends Person {
         this.selectedCourse.addAssignment(assignmentName, maxScore);
     }
 
-    //For the currently selected Assignment, adds a Students name and score to the HashMap which keeps tracks of grades..
-    protected void addStudentScore(String studentName, int score) {
+    //For the currently selected Assignment, adds a Students name and score to the HashMap which keeps tracks of grades.
+    //addStudentScore stills lets us add a Students score to the hashmap even when they aren't enrolled.
+    protected void addStudentScore(String studentName, int score) throws Exception {
         if(this.selectedCourse.studentRoster.containsKey(studentName)) { //Checks if student is within the roster of this course
             this.selectedCourse.selectedAssignment.addScore(studentName, score);
 
-            double updatedClassGrade = this.selectedCourse.getStudentCourseAvg(studentName); //Wakes up course average to calculate new assignment
+            int updatedClassGrade = (int)this.selectedCourse.getStudentGrade(studentName); //Wakes up course average to calculate new assignment
             this.selectedCourse.studentGrades.put(studentName, updatedClassGrade); //Update based on new calculation
         } else {
             System.out.println("Error. Student" + studentName + "is not enrolled in this course.");
@@ -51,11 +52,11 @@ public class Teacher extends Person {
 
     protected void addStudentScore() { //Overload method for prompting rather than using arguments iniitally
             Scanner scnr = new Scanner(System.in);
-            
+
             System.out.print("Enter a student name.");
             String studentName = scnr.nextLine();
 
-            System.out.println("Enter a score."); 
+            System.out.println("Enter a score.");
             while(!scnr.hasNextInt()) {
             scnr.hasNext();
             }
@@ -105,15 +106,17 @@ public class Teacher extends Person {
             writer.newLine();
             writer.write("---");
             writer.newLine();
-                //Runs thru student roster and retreives each name, then gets course average
-                for (String studentName : course.studentRoster.keySet()) {
-                    double studentGrade = course.getStudentCourseAvg(studentName);
+            //Runs thru student roster and retreives each name, then gets course average
+            for (String studentName : course.studentRoster.keySet()) {
+                double studentGrade = course.getStudentGrade(studentName);
 
-                    writer.write(studentName + ": " + studentGrade);
-                    writer.newLine();
-                }
-                writer.write("---");
+                writer.write(studentName + ": " + studentGrade);
                 writer.newLine();
+            }
+            writer.write("---");
+            writer.newLine();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
