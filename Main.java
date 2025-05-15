@@ -28,7 +28,7 @@ public class Main {
         dube.addAssignment("Homework1", 100);
         dube.addAssignment("Group Project",100);
 
-
+        //Adds a list of scores to 2 separate assignments for each student.
         dube.selectedCourse.setSelectedAssignment("Homework1");
         dube.addStudentScore("Matt", 50);
         dube.addStudentScore("Brody",80);
@@ -40,6 +40,8 @@ public class Main {
         dube.addStudentScore("Jack",100);
         dube.addStudentScore("Kate",100);
 
+        //Prompts for a userID and throws an exception if there is a mismatch problem. Will also loop
+        //IF the provided input is 0, meaning it never got a legitimate input.
         System.out.println("Please input a user ID.");
         int inputID;
         do {
@@ -51,6 +53,7 @@ public class Main {
             }
         } while (inputID == 0);
 
+        //Prints a text based menu for any ID less than 10001, representing a Teacher.
         if (inputID < 10001 && inputID > 0) {
             do {
                 System.out.println();
@@ -65,10 +68,8 @@ public class Main {
                 System.out.println("8: Exit.");
                 menuSelection = scnr.nextInt();
                 scnr.nextLine();
-                //TODO
-                //These prompts that ask for user input can be placed in the actual methods themselves,
-                //such as Teacher.addAssignment. The prompt can be placed there which would save space here.
-                //Would also need to make sure that we call selectCourse and selectAssignment when we do it.
+
+                //List of variables to be available for each switch case.
                 String studentName;
                 String assignmentName;
                 int score;
@@ -140,6 +141,7 @@ public class Main {
                         break;
                 }
             } while (menuSelection != 8);
+        //Displays the text based menu for an inputID that is over 10000, representing a Student.
         } else if (inputID > 10000) {
             do {
                 System.out.println("Please select a menu option:");
