@@ -17,11 +17,17 @@ public class Main {
         Student kate = new Student("Kate","ffff@ffff",23);
 
         dube.createCourse("CIS210", "Intro to computer science", "MWF 2:00 - 3:20", 3413);
+        dube.createCourse("CIS201", "Intro to computer science","MWF 1:00 - 1:30",3143);
 
+        //Enrolling students in courses.
         matt.enroll("CIS210");
         brody.enroll("CIS210");
         jack.enroll("CIS210");
         kate.enroll("CIS210");
+        matt.enroll("CIS201");
+        brody.enroll("CIS201");
+        jack.enroll("CIS201");
+        kate.enroll("CIS201");
 
         dube.setSelectedCourse("CIS210");
         matt.setSelectedCourse("CIS210");
@@ -39,6 +45,14 @@ public class Main {
         dube.addStudentScore("Brody",100);
         dube.addStudentScore("Jack",100);
         dube.addStudentScore("Kate",100);
+
+        dube.setSelectedCourse("CIS201");
+        dube.selectedCourse.addAssignment("Test 2", 50);
+        dube.selectedCourse.setSelectedAssignment("Test 2");
+        dube.addStudentScore("Matt", 49);
+        dube.addStudentScore("Brody", 45);
+        dube.addStudentScore("Jack", 50);
+        dube.addStudentScore("Kate", 47);
 
         //Prompts for a userID and throws an exception if there is a mismatch problem. Will also loop
         //IF the provided input is 0, meaning it never got a legitimate input.
@@ -104,15 +118,20 @@ public class Main {
                         score = scnr.nextInt();
                         dube.addStudentScore(studentName, score);
                         break;
+                    //There is an issue where this method shows the literal value of the assignment rather than a percentage.
+                    //This causes it to show a grade that is not accurate when calling the method.
                     case 4:
                         System.out.println();
                         System.out.println("Input the name of the course that you want to display the grades for.");
                         dube.setSelectedCourse(scnr.nextLine());
                         System.out.println("Average score for " + dube.selectedCourse.courseName + " is " + dube.displayCourseAvg());
                         break;
+                    //This method has the same issue as case 4 from above. It shows the point value of the assignment
+                    //Instead of showing a percentage for the course.
                     case 5:
                         System.out.println();
                         System.out.println("Input the name of the assignment that you want to display the average for.");
+                        scnr.next();
                         dube.selectedCourse.setSelectedAssignment(scnr.nextLine());
                         System.out.println("Average score for " + dube.selectedCourse.selectedAssignment.assignmentName + " is " + dube.displayAssignmentAvg());
                         break;

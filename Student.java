@@ -8,7 +8,7 @@ public class Student extends Person {
         this.name = name;
         this.email = email;
         this.age = age;
-        this.idNumber = nextId;
+        this.idNumber = nextId + 10000;
         //Increments static variable nextId so that no 2 Student/Teacher objects have the same idNumber
         ++nextId;
     }
@@ -90,7 +90,7 @@ public class Student extends Person {
     protected void exportAllCourseGrades(Student student) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.name.replaceAll(" ", "_") + "_all_course_grades" + ".txt"))) {
             for (Course course : student.schedule) { // Iterate through student roster
-                writer.write("Course: " + selectedCourse.getCourseName()); //Iterate through course list
+                writer.write("Course: " + course.getCourseName()); //Iterate through course list
                 writer.newLine();
 
                 if (course.selectedAssignment != null) { //Goes through every assignment, gets grade and prints it
