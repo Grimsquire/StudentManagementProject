@@ -165,7 +165,7 @@ public class Main {
                         System.out.println();
                         System.out.println("Enter a course name to view grade.");
                         matt.setSelectedCourse(scnr.nextLine());
-                        matt.displayCourseGrade(genericStudent.selectedCourse.courseName);
+                        matt.displayCourseGrade(matt.selectedCourse.courseName);
                         break;
                     case 3:
                         System.out.println();
