@@ -52,6 +52,7 @@ public class Main {
                 throw new IllegalArgumentException("Invalid input: Please enter a number ID.");
             }
         } while (inputID == 0);
+        System.out.println();
 
         //Prints a text based menu for any ID less than 10001, representing a Teacher.
         if (inputID < 10001 && inputID > 0) {
@@ -148,8 +149,9 @@ public class Main {
                 System.out.println("1: Enroll in a course.");
                 System.out.println("2: Check a course grade.");
                 System.out.println("3: Check all course grades.");
-                System.out.println("4: Export my course grades.");
-                System.out.println("5: Exit");
+                System.out.println("4: Export a course grade.");
+                System.out.println("5: Export all course grades.");
+                System.out.println("6: Exit");
                 menuSelection = scnr.nextInt();
 
                 scnr.nextLine();
@@ -177,8 +179,15 @@ public class Main {
                         System.out.println("Enter a course name to export grades to a file.");
                         matt.setSelectedCourse(scnr.nextLine());
                         matt.exportCourseGrades(genericStudent.selectedCourse);
+                        System.out.println("Done!");
                         break;
                     case 5:
+                        System.out.println();
+                        System.out.println("Exporting all course grades.");
+                        matt.exportAllCourseGrades(matt);
+                        System.out.println("Done!");
+                        break;
+                    case 6:
                         System.out.println();
                         continue;
                     default:
@@ -186,7 +195,7 @@ public class Main {
                         System.out.println("Invalid selection.");
                 }
                 System.out.println();
-            } while (menuSelection != 5);
+            } while (menuSelection != 6);
         } else {
             System.out.println("Invalid ID.");
         }
