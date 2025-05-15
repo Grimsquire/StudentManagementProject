@@ -36,9 +36,9 @@ public class Main {
         dube.addStudentScore("Kate",81);
         dube.selectedCourse.setSelectedAssignment("Group Project");
         dube.addStudentScore("Matt",100);
-        dube.addAssignment("Brody",100);
-        dube.addAssignment("Jack",100);
-        dube.addAssignment("Kate",100);
+        dube.addStudentScore("Brody",100);
+        dube.addStudentScore("Jack",100);
+        dube.addStudentScore("Kate",100);
 
         System.out.println("Please input a user ID.");
         int inputID;
@@ -154,8 +154,6 @@ public class Main {
                 String courseName;
                 switch (menuSelection) {
                     case 1:
-                        //TODO
-                        //Doesn't actually put the student names into the course properly.
                         System.out.println();
                         System.out.println("Enter a course name to enroll.");
                         courseName = scnr.nextLine();
